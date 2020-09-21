@@ -22,7 +22,7 @@ export default {
 	}),
 	computed: {
 		base() {
-			return this.$store.getters.info.bill / (this.rates['KZT'] / this.rates['EUR'])
+			return this.$store.getters.info.bill / (this.rates['KZT'] / this.rates['USD'])
 		}
 	},
 	methods: {

@@ -13,13 +13,16 @@
           :class="{invalid: $v.name.$dirty && !$v.name.required}"
         />
         <label for="description">{{'Name' | localize}}</label>
-        <small class="helper-text invalid" v-if="$v.name.$dirty && !$v.name.required">{{'Message_Enter_Name' | localize}}</small>
+        <small
+          class="helper-text invalid"
+          v-if="$v.name.$dirty && !$v.name.required"
+        >{{'Message_Enter_Name' | localize}}</small>
       </div>
 
       <div class="switch">
         <label>
           English
-          <input type="checkbox" v-model="isRulocale"/>
+          <input type="checkbox" v-model="isRulocale" />
           <span class="lever"></span>
           Русский
         </label>
@@ -37,17 +40,23 @@
 import { mapGetters, mapActions } from 'vuex'
 import { required } from 'vuelidate/lib/validators'
 import M from 'materialize-css'
+import localizeFilter from '@/filters/localize.filter'
 export default {
+  metaInfo() {
+	  return {
+		  title: this.$title('ProfileTitle')
+	  }
+  },
   data: () => ({
-	name: '',
-	isRulocale: true
+    name: '',
+    isRulocale: true
   }),
   validations: {
     name: { required }
   },
   mounted() {
-	this.name = this.info.name
-	this.isRulocale = this.info.locale === 'ru-RU'
+    this.name = this.info.name
+    this.isRulocale = this.info.locale === 'ru-RU'
     setTimeout(() => {
       M.updateTextFields()
     })
@@ -56,19 +65,18 @@ export default {
     ...mapGetters(['info'])
   },
   methods: {
-	  ...mapActions(['updateInfo']),
+    ...mapActions(['updateInfo']),
     async submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
       }
-      
 
       try {
         await this.updateInfo({
-			name: this.name,
-			locale: this.isRulocale ? 'ru-RU' : 'en-US'
-		})
+          name: this.name,
+          locale: this.isRulocale ? 'ru-RU' : 'en-US'
+        })
       } catch (e) {}
     }
   }
