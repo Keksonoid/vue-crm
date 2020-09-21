@@ -44,7 +44,7 @@
         <span
           v-if="$v.amount.$dirty && !$v.amount.minValue"
           class="helper-text invalid"
-        >Минимальная значение {{$v.amount.$params.minValue.min}}</span>
+        >{{'Message_MinLength'|localize}} {{$v.amount.$params.minValue.min}}</span>
       </div>
 
       <div class="input-field">
@@ -58,11 +58,11 @@
         <span
           v-if="$v.description.$dirty && !$v.description.required"
           class="helper-text invalid"
-        >Введите описание</span>
+        >{{'Message_EnterDescription'|localize}}</span>
       </div>
 
       <button class="btn waves-effect waves-light" type="submit">
-        Создать
+        {{'Create'|localize}}
         <i class="material-icons right">send</i>
       </button>
     </form>

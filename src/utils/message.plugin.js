@@ -1,13 +1,14 @@
 import M from 'materialize-css'
+import localizeFilter from '@/filters/localize.filter'
 export default {
 	
-	install(Vue) {
+	install(Vue, options) {
 		Vue.prototype.$message = function(html) {
 			M.toast({html})
 		}
 
 		Vue.prototype.$error = function(html) {
-			M.toast({html: `[Ошибка]: ${html}`})
+			M.toast({html: `[${localizeFilter('Error')}]: ${html}`})
 		}
 	}
 }
